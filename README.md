@@ -1,5 +1,7 @@
 # Next.js 个人主页 + 后台
 
+这是一个可以部署到 Vercel 的 Next.js 个人主页，包含公开首页、后台编辑页、服务端 API，以及本地 JSON / Vercel Redis 两种存储模式。
+
 ## 部署结论
 
 可以部署到 Vercel。Vercel 会自动识别 Next.js 项目并执行 `npm install` 和 `npm run build`，本仓库也额外提供了 `vercel.json`，明确指定 Next.js 框架和构建命令，避免导入项目时选错框架。
@@ -28,6 +30,7 @@
 可选变量：
 
 - `PROFILE_KV_KEY`：Redis 中保存资料的 key，默认是 `profile`。
+
 这是一个使用 Next.js 编写的个人主页示例，包含首页展示和一个简单后台。
 
 ## 可行性判断
@@ -58,6 +61,13 @@ npm install
 npm run dev
 ```
 
+提交或部署前可以先运行仓库自检，确认没有冲突标记、JSON 格式错误或关键文件语法错误：
+
+```bash
+npm run check
+```
+
+
 然后访问：
 
 - 首页：<http://localhost:3000>
@@ -83,6 +93,8 @@ ADMIN_TOKEN="your-secure-token" npm run start
 ## API 与数据
 
 - `GET /api/profile`：读取首页资料，并返回当前存储模式。
+- `PUT /api/profile`：需要 `x-admin-token` 请求头；本地写入 `data/profile.json`，Vercel 上使用 Redis REST API 持久化。
+- `GET /api/health`：部署健康检查，返回 `ok`、`storageMode` 和资料是否加载成功。
 
 ## Vercel 部署排查
 
