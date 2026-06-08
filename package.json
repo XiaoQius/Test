@@ -2,11 +2,7 @@
   "name": "personal-homepage-next",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
-  "engines": {
-    "node": ">=20"
-  },
-  "scripts": {
+  "type": "module"  "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
